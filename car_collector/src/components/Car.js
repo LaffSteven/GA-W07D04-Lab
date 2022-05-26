@@ -13,4 +13,4 @@ const Car = (props) => {
 
 }
 
-export default Answer
+export default Car
