@@ -5,12 +5,18 @@ import {useState} from 'react';
 
 const Cars = (props) => {
 
-    // state to hold list of cars from props
-    const [allCars, setAllCars] = useState(props);
-
     return (
         <>
-            List of Cars
+            <h2>List of Cars</h2>
+            <>
+                {props.carList.map((car) => {
+                    return (
+                        <p>
+                            {car.make}
+                        </p>
+                    )
+                })}
+            </>
         </>
     )
 

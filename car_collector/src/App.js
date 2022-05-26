@@ -21,10 +21,14 @@ const App = () => {
             });
     });
 
+    const renderCarList = () => {
+        return <Cars carList={carList}/>
+    }
+
     return (
         <>
             <h1>Hello!</h1>
-            <Cars cars={carList}/>
+            <>{renderCarList()}</>
         </>
     )
 }
