@@ -22,7 +22,7 @@ const App = () => {
     });
 
     const renderCarList = () => {
-        return <Cars carList={carList}/>
+        return <Cars cars={carList}/>
     }
 
     return (

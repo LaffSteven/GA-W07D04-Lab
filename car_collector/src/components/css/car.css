@@ -1,0 +1,25 @@
+.car-container {
+    margin: 1em auto;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid black;
+}
+
+.car-header{
+
+}
+.car-info div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+.car-info h4, p{
+    margin: .5em 0 .5em 0;
+}
+.car-info img {
+    width: 300px;
+}
