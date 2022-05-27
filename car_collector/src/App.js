@@ -19,7 +19,7 @@ const App = () => {
     const [newYear, setNewYear] = useState();
     const [newColor, setNewColor] = useState("");
     const [newImage, setNewImage] = useState("");
-    const [newWeekendCar, setNewWeekendCar] = useState(false);
+    const [newWeekend, setNewWeekend] = useState(false);
 
     // get request api for cars on page load
     useEffect(() => {
@@ -42,12 +42,13 @@ const App = () => {
         return (
             <>
                 <form onSubmit={handleNewCarSubmit}>
-                    Make: <input type="text" value={newMake} onChange={handleNewMakeChange}/>
-                    Model:
-                    Year:
-                    Image:
-                    Color:
-                    Weekend :
+                    Make: <input type="text" onChange={handleNewMakeChange}/> <br/>
+                    Model: <input type="text" onChange={handleNewModelChange}/> <br/>
+                    Year: <input type="number" onChange={handleNewYearChange}/> <br/>
+                    Image: <input type="url" onChange={handleNewImageChange}/> <br/>
+                    Color: <input type="text" onChange={handleNewColorChange}/> <br/>
+                    Weekend Fun: <input type="checkbox" onChange={handleNewWeekendChange}/> <br/>
+                    <input type="submit" value="Save New Car"/>
                 </form>
                 <button onClick={toggleShowNewCarForm}>Cancel</button>
             </>
@@ -68,8 +69,31 @@ const App = () => {
     const handleNewColorChange = (event) => {
         setNewColor(event.target.value);
     }
-    const handleNewCarSubmit = () => {
-
+    const handleNewWeekendChange = (event) => {
+        setNewWeekend(event.target.checked);
+    }
+    const handleNewCarSubmit = (event) => {
+        event.preventDefault();
+        axios.post('http://localhost:3000/cars', {
+            make : newMake,
+            model : newModel,
+            year : newYear,
+            image : newImage,
+            color : newColor,
+            weekendCar : newWeekend
+        }).then(() => {
+            axios.get('http://localhost:3000/cars')
+                .then((response) => {
+                    setCarList(response.data)
+                })
+        })
+        setNewMake("")
+        setNewModel("")
+        setNewYear(null)
+        setNewImage("")
+        setNewColor("")
+        setNewWeekend(false)
+        setShowNewCarForm(false)
     }
 
     return (
