@@ -18,7 +18,7 @@ const Car = (props) => {
     const toggleShowEditForm = (event) => {
         setShowEditForm(!showEditForm);
     }
-
+    // create comparison car and values to allow state changes in the edit form
     const assignEditCar = (car) => {
         setEditCar(car);
         setNewMake(car.make)
@@ -46,27 +46,30 @@ const Car = (props) => {
 
     const renderEditForm = () => {
         return (
-            <form onSubmit={handleEditFormSubmit}>
-                Make <input type="text" value={newMake} onChange={handleNewMakeChange}/> <br/>
-                Model: <input type="text" value={newModel} onChange={handleNewModelChange}/> <br/>
-                Year: <input type="number" value={newYear} onChange={handleNewYearChange}/> <br/>
-                Image: <input type="url" value={newImage} onChange={handleNewImageChange}/> <br/>
-                Color: <input type="text" value={newColor} onChange={handleNewColorChange}/> <br/>
-                <input type="submit" value="Save Changes"/>
+            <>
+                <form onSubmit={handleEditFormSubmit}>
+                    Make <input type="text" value={newMake} onChange={handleNewMakeChange}/> <br/>
+                    Model: <input type="text" value={newModel} onChange={handleNewModelChange}/> <br/>
+                    Year: <input type="number" value={newYear} onChange={handleNewYearChange}/> <br/>
+                    Image: <input type="url" value={newImage} onChange={handleNewImageChange}/> <br/>
+                    Color: <input type="text" value={newColor} onChange={handleNewColorChange}/> <br/>
+                    <input type="submit" value="Save Changes"/>
+                </form>
                 <button onClick={toggleShowEditForm}>Cancel</button>
-                <button onClick={(event) => {handleDelete()}}>DELETE</button>
-            </form>
+                <button onClick={(event) => {handleDelete(editCar._id)}}>DELETE</button>
+            </>
         )
     }
 
+    // hide edit form and clear states to prevent form conflicts
     const handleCancelEdit = () => {
         setEditCar({});
-        setNewMake("")
-        setNewModel("")
-        setNewYear(null)
-        setNewImage("")
-        setNewColor("")
-        toggleShowEditForm();
+        setNewMake("");
+        setNewModel("");
+        setNewYear(null);
+        setNewImage("");
+        setNewColor("");
+        setShowEditForm(false);
     }
 
     // functions to handle the change in state of the edit forms
@@ -86,12 +89,8 @@ const Car = (props) => {
         setNewColor(event.target.value);
     }
 
-    const handleDelete = (car) => {
-        console.log(`Deleting: ${car.make} ${car.model}`);
-        axios.delete(`http://localhost:300/cars/${car._id}`)
-            .then(() => {
-                axios.get()
-            })
+    const handleDelete = (id) => {
+        axios.delete(`http://localhost:3000/cars/${id}`)
     }
 
     const renderCar = () => {
