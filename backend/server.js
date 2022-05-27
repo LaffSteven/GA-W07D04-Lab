@@ -31,8 +31,9 @@ app.delete('/cars/:id', (req, res) => {
 
 // create edit route
 app.put('/cars/:id', (req, res) => {
-  Cars.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedCars) => {
-    res.json(updatedCars)
+    console.log(req.params._id);
+  Cars.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedCar) => {
+    res.json(updatedCar)
   })
 })
 

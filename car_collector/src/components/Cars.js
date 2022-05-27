@@ -1,17 +1,30 @@
 import React from 'react'
-import Car from './Cars.js'
+import Car from './Car.js'
+import './css/car.css'
 
 import {useState} from 'react';
 
 const Cars = (props) => {
 
-    // state to hold list of cars from props
-    const [allCars, setAllCars] = useState([]);
+    //
+    const renderCar = (car) => {
+        return (
+            <div key={car._id}>
+                <Car car={car}/>
+            </div>
+        )
+    }
 
     return (
         <>
-            List of Cars
-            <Car/>
+            <h2>List of Cars</h2>
+            <>
+                {props.cars.map((car) => {
+                    return (
+                        renderCar(car)
+                    )
+                })}
+            </>
         </>
     )
 
