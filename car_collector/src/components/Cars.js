@@ -6,7 +6,7 @@ import {useState} from 'react';
 
 const Cars = (props) => {
 
-    //
+    // renders car compenent
     const renderCar = (car) => {
         return (
             <div key={car._id}>
@@ -14,6 +14,7 @@ const Cars = (props) => {
             </div>
         )
     }
+
 
     return (
         <>
